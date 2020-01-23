@@ -27,7 +27,7 @@ contract SocialNetwork {
     );
 
     constructor() public{
-        name = "dapp university social network";
+        name = "ujicoba smart contract medsos blockchain";
     }
 
     function createPost(string memory _content) public{
