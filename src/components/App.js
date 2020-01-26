@@ -42,7 +42,7 @@ class App extends Component {
       for(var i = 1; i <= postCount; i++){
         const post = await socialNetwork.methods.posts(i).call()
         this.setState({
-          posts: [...this.state.posts, post]
+          posts: [...this.state.posts, post] //Load post from blockchain
         })
       }
       console.log({posts: this.state.posts})
