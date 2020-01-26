@@ -45,6 +45,10 @@ class App extends Component {
           posts: [...this.state.posts, post] //Load post from blockchain
         })
       } 
+      //sort post. show highest tipped posts first
+      this.setState({
+        posts: this.state.posts.sort((a,b)=> b.tipAmount - a.tipAmount)
+      })
       this.setState({loading: false})
     } else {
       window.alert('SocialNetwork contract not deployed to detected network')
@@ -61,6 +65,14 @@ class App extends Component {
     })
   }
 
+  tipPost(id, tipAmount){
+    this.setState({loading:true})
+    this.state.socialNetwork.methods.tipPost(id).send({from: this.state.account, value:tipAmount})
+    .once('receipt', (receipt) => {
+      this.setState({loading:false})
+    })
+  }
+
   constructor(props){
     super(props)
     this.state = {
@@ -71,6 +83,7 @@ class App extends Component {
       loading: true
     }
     this.createPost = this.createPost.bind(this)
+    this.tipPost = this.tipPost.bind(this)
   }
 
   render() {
@@ -82,6 +95,7 @@ class App extends Component {
           : <Main 
               posts={this.state.posts} 
               createPost={this.createPost}
+              tipPost={this.tipPost}
             />
         }
       </div>

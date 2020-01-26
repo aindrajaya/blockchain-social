@@ -35,10 +35,16 @@ class Main extends Component{
                           <small className="flowt-left mt-1 text-muted">
                             TIPS: {window.web3.utils.fromWei(post.tipAmount.toString(), 'Ether')}
                           </small>
-                          <button className="btn btn-link btn-sm float-right pt-0">
-                            <span>
-                              TIP 0.1 ETH
-                            </span>
+                          <button className="btn btn-link btn-sm float-right pt-0" 
+                            name={post.id}
+                            onClick={(event)=> {
+                                //call the tip function
+                                //tip Amount
+                                let tipAmount = window.web3.utils.toWei('0.1', 'Ether')
+                                //tip post function
+                                this.props.tipPost(event.target.name, tipAmount)
+                            }}
+                          > TIP 0.1 ETH
                           </button>
                         </li>
                       </ul>
